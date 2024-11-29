@@ -3,7 +3,7 @@
 Para criar o ambiente na máquina, siga os comandos: 
 
 1º - `python -m venv ven`
-2º - `venv\Scripts\activate`
+2º - `ven\Scripts\activate`
 3º - `pip install -r requirements.txt`
 
 Confirme a instalação das bibliotecas com: 

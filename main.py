@@ -25,6 +25,17 @@ st.title("Grafico Teste")
 st.sidebar.header('Filtros')
 col1,cold2 = st.columns(2)
 col3, col4 = st.columns(2)
+<<<<<<< HEAD
+=======
+
+cidades_denuncias = set(denuncias['cidade'])
+cidades_populacao = set(populacao['cidade'])
+cidades_precipitacoes = set(precipitacoes['cidade'])
+cidades_reservatorios = set(reservatorios['cidade'])
+
+# Interseção de cidades presentes em todos os DataFrames
+cidades_comuns = set(cidades_denuncias) | set(cidades_populacao) | set(cidades_precipitacoes) | set(cidades_reservatorios)
+>>>>>>> 95507bec00b04ea5a100904814730559cd9e8657
 
 # Verificar as cidades em cada planilha
 cidades_denuncias, denuncias_vazia = verificar_cidades(denuncias, 'cidade', 'Denúncias')
@@ -46,6 +57,7 @@ cidade_selecionada = st.sidebar.selectbox(
     sorted(cidades_comuns)
 )
 
+<<<<<<< HEAD
 
 # lendo arquivo CSV
 file_path = 'utils/execorcamentaria_naturezadespesa_202407.csv'
@@ -67,6 +79,14 @@ coluna_selecionada = st.sidebar.selectbox(
 fig = px.histogram(df, x=coluna_selecionada)
 col3.plotly_chart(fig)
 
+=======
+# Sidebar para seleção de cidades
+cidade_selecionada = st.sidebar.selectbox(
+    "Escolha uma cidade para filtrar:",
+    sorted(cidades_comuns)
+)
+
+>>>>>>> 95507bec00b04ea5a100904814730559cd9e8657
 
 
 

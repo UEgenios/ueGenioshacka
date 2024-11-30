@@ -15,5 +15,5 @@ Caso adicione alguma biblioteca, antes de fazer o commit executar na pasta do pr
 
 Para executar o projeto 
 
-`streamlit run main.py`
+`python main.py`
 

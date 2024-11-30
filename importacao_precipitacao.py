@@ -1,7 +1,7 @@
 import csv
 import pandas as pd
 
-file_path = 'utils/INMET_CO_GO_A002_GOIANIA_01-01-2024_A_31-10-2024.csv'
+file_path = 'utils/INMET_CO_GO_A035_ITUMBIARA_01-01-2024_A_31-10-2024.csv'
 
 # lendo o CSV
 arquivo_csv = pd.read_csv(file_path, sep=";", decimal=",", encoding='ANSI')
@@ -16,11 +16,11 @@ agrupado["dia"] = pd.to_numeric(agrupado["Data"].dt.day)
 #         print(linha_atual)
 print(agrupado)
 #escrevendo no arquivo precipitacao
-precipitacao = pd.DataFrame()
+precipitacao = pd.read_csv("bd/precipitacao.csv", sep=",", decimal=".", encoding='utf-8')
 rows_list = []
 for i,linha_atual in agrupado.iterrows():
     print(linha_atual)
-    dict1 = {'cidade': 'Goiânia', 'ano': linha_atual['ano'], 'mes': linha_atual['mes'], 'dia': linha_atual['dia'], 'data': linha_atual['Data'], 'volume': linha_atual['PRECIPITACAO'], 'data_importacao': '2024/11/29'}
+    dict1 = {'cidade': 'Itumbiara', 'ano': linha_atual['ano'], 'mes': linha_atual['mes'], 'dia': linha_atual['dia'], 'data': linha_atual['Data'], 'volume': linha_atual['PRECIPITACAO'], 'data_importacao': '2024/11/29'}
     rows_list.append(dict1)
 precipitacao = precipitacao._append(pd.DataFrame(rows_list), ignore_index=True)
 precipitacao.to_csv("bd/precipitacao.csv", index=False)

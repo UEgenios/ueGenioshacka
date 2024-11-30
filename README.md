@@ -1,4 +1,4 @@
-# Projeto UEgênios
+# Projeto EcoVision – Construindo uma visão sustentável para o futuro
 
 Para criar o ambiente na máquina, siga os comandos: 
 

@@ -2,9 +2,8 @@
 
 Para criar o ambiente na máquina, siga os comandos: 
 
-1º - `python -m venv ven`
-2º - `venv\Scripts\activate`
-3º - `pip install -r requirements.txt`
+1º - `python -m venv ven` </br>
+2º - `pip install -r requirements.txt`
 
 Confirme a instalação das bibliotecas com: 
 
@@ -16,5 +15,5 @@ Caso adicione alguma biblioteca, antes de fazer o commit executar na pasta do pr
 
 Para executar o projeto 
 
-`python main.py`
+`streamlit run main.py`
 

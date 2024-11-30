@@ -2,6 +2,8 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 import util
+from importacao_precipitacao import precipitacao
+from util import carrega_denuncia, carrega_populacao, carrega_precipitacao, carrega_reservatorios,verificar_cidades
 
 ################### Anotações temporarias ################################
 # rodar a pagina, digitar no terminal "streamlit run main.py"
@@ -10,19 +12,40 @@ import util
 #
 #
 ##########################################################################
+denuncias = carrega_denuncia()
+populacao = carrega_populacao()
+precipitacoes = carrega_precipitacao()
+reservatorios = carrega_reservatorios()
 
 
 
 # configs da pagina
 st.set_page_config(layout="wide",page_title="Hacka")
-col1, col2 = st.columns(2)
-col3, col4 = st.columns(2)
+st.title("Grafico Teste")
 st.sidebar.header('Filtros')
+col1,cold2 = st.columns(2)
+col3, col4 = st.columns(2)
 
+# Verificar as cidades em cada planilha
+cidades_denuncias, denuncias_vazia = verificar_cidades(denuncias, 'cidade', 'Denúncias')
+cidades_populacao, populacao_vazia = verificar_cidades(populacao, 'cidade', 'População')
+cidades_precipitacoes, precipitacoes_vazia = verificar_cidades(precipitacoes, 'cidade', 'Precipitações')
+cidades_reservatorios, reservatorios_vazia = verificar_cidades(reservatorios, 'cidade', 'Reservatórios')
 
-# Conteúdo principal
-col1.title("Grafico Teste")
-col1.markdown("Test")
+cidades_denuncias = set(denuncias['cidade'])
+cidades_populacao = set(populacao['cidade'])
+cidades_precipitacoes = set(precipitacoes['cidade'])
+cidades_reservatorios = set(reservatorios['cidade'])
+
+# Interseção de cidades presentes em todos os DataFrames
+cidades_comuns = cidades_denuncias & cidades_populacao & cidades_precipitacoes & cidades_reservatorios
+
+# Sidebar para seleção de cidades
+cidade_selecionada = st.sidebar.selectbox(
+    "Escolha uma cidade para filtrar:",
+    sorted(cidades_comuns)
+)
+
 
 # lendo arquivo CSV
 file_path = 'utils/execorcamentaria_naturezadespesa_202407.csv'
@@ -42,7 +65,7 @@ coluna_selecionada = st.sidebar.selectbox(
 
 # gráfico com a coluna selecionada
 fig = px.histogram(df, x=coluna_selecionada)
-col4.plotly_chart(fig)
+col3.plotly_chart(fig)
 
 
 

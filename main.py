@@ -1,5 +1,4 @@
 from datetime import datetime
-
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -60,26 +59,6 @@ except ValueError:
     st.sidebar.error("O mês deve ser um número inteiro entre 1 e 12.")
     mes_input = None
 
-# Exibir erro se o ano ou mês não forem válidos
-if not validacao_ano:
-    st.sidebar.error("O ano ou mês deve ser no futuro!")
-# Mostrar a variável que armazena os filtros
-if validacao_ano and validacao_mes:
-    st.write(f"Filtro aplicado: Ano = {filtro_ano_mes['ano']}, Mês = {filtro_ano_mes['mes']}")
-
-    # Filtrar dados com base no ano e mês digitados
-    if filtro_ano_mes['ano'] and filtro_ano_mes['mes']:
-        # Filtro por ano e mês
-        df_filtrado = df_futuro[(df_futuro['ano'] == filtro_ano_mes['ano']) & (df_futuro['mes'] == filtro_ano_mes['mes'])]
-    elif filtro_ano_mes['ano']:
-        # Filtro por ano
-        df_filtrado = df_futuro[df_futuro['ano'] == filtro_ano_mes['ano']]
-    elif filtro_ano_mes['mes']:
-        # Filtro por mês (aplica para todos os anos disponíveis)
-        df_filtrado = df_futuro[df_futuro['mes'] == filtro_ano_mes['mes']]
-    else:
-        # Caso não haja filtro, mostrar todos os dados futuros
-        df_filtrado = df_futuro
 
 # Armazenar os valores do ano e mês em uma variável para uso posterior
 filtro_ano_mes = {'ano': ano_input, 'mes': mes_input}

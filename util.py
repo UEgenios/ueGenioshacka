@@ -26,7 +26,7 @@ def carrega_populacao():
     return populacao
 
 def carrega_reservatorios():
-    reservatorios = pd.read_csv("bd/populacao.csv", sep=",", decimal=".")
+    reservatorios = pd.read_csv("bd/reservatorios.csv", sep=",", decimal=".")
     return reservatorios
 
 def verificar_cidades(df, coluna_cidade, nome_planilha):
@@ -35,3 +35,21 @@ def verificar_cidades(df, coluna_cidade, nome_planilha):
     else:
         st.warning(f"A planilha '{nome_planilha}' está vazia.")
         return set(), True
+
+
+def filtrar_dados(df, cidade, ano, mes):
+    print("Colunas disponíveis:", df.columns)
+    if 'data' in df.columns:
+        df['data'] = pd.to_datetime(df['data'], format='%Y/%m/%d', errors='coerce')
+    else:
+        st.warning("A coluna 'data' não foi encontrada no DataFrame.")
+        return df
+
+    df_filtrado = df[df['cidade'] == cidade]
+
+    if ano:
+        df_filtrado = df_filtrado[df_filtrado['data'].dt.year == ano]
+    if mes:
+        df_filtrado = df_filtrado[df_filtrado['data'].dt.month == mes]
+
+    return df_filtrado

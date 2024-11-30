@@ -28,6 +28,8 @@ st.sidebar.header('Filtros')
 col1,cold2 = st.columns(2)
 col3, col4 = st.columns(2)
 
+####### filtros #######
+## Cidades ##
 cidades_denuncias = set(denuncias['cidade'])
 cidades_populacao = set(populacao['cidade'])
 cidades_precipitacoes = set(precipitacoes['cidade'])
@@ -36,14 +38,13 @@ cidades_reservatorios = set(reservatorios['cidade'])
 # cidades presentes em todos os DataFrames
 cidades_comuns = set(set(cidades_denuncias) | set(cidades_populacao) | set(cidades_precipitacoes) | set(cidades_reservatorios))
 
-
 # seleção de cidades
 cidade_selecionada = st.sidebar.selectbox(
     "Escolha uma cidade para filtrar:",
     sorted(cidades_comuns)
 )
 
-####### Graficos #######
+## Mes ou ano futuros ##
 data_atual = datetime.today()
 ano_input = st.sidebar.text_input('Digite o Ano (ex: 2024):', value=str(data_atual.year))
 mes_input = st.sidebar.text_input('Digite o Mês (1-12):', value=str(data_atual.month))
@@ -63,10 +64,6 @@ except ValueError:
 # Armazenar os valores do ano e mês em uma variável para uso posterior
 filtro_ano_mes = {'ano': ano_input, 'mes': mes_input}
 
-# Mostrar a variável que armazena os filtros
-st.write(f"Filtro aplicado: Ano = {filtro_ano_mes['ano']}, Mês = {filtro_ano_mes['mes']}")
+####### Graficos #######
 
 
-
-# Exibir os dados filtrados
-st.write("Dados filtrados:")
